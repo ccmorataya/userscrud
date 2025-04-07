@@ -73,4 +73,22 @@ public class UserService {
 
     return existingUser;
   }
+
+  public Optional<User> validateUser(String email, String password) {
+    Optional<User> user = userRepository.findByEmail(email);
+
+    if (user.isPresent()) {
+        // Si la contraseña es opcional, solo valida si no es nula o vacía
+        if (password == null || password.isEmpty()) {
+            return user; // Devuelve el usuario si solo se valida el nombre de usuario
+        }
+
+        // Si la contraseña no es opcional, valida contra la base de datos
+        if (passwordEncoder.matches(password, user.get().getPassword())) {
+            return user;
+        }
+    }
+
+    return Optional.empty(); // Usuario no válido
+  }
 }

@@ -3,7 +3,7 @@ package com.morataya.userscrud.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_users")
 public class User {
 
   @Id
