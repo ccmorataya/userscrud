@@ -15,9 +15,10 @@ import com.morataya.userscrud.repository.UserRepository;
 @Service
 public class UserService {
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
 
-  private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
